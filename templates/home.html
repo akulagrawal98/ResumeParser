@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+	<div class="jumbotron">
+<h1> Resume Parser</h1>
+</div>
+<br>
+{% if err %}
+<h3> Resume Already Present, Check "View Resume"</h3>
+{% endif %}
+{% if resume_upload %}
+<form method="POST" style="margin-bottom: 2em;">
+    <div class="form-group">
+    <label for="exampleInputEmail1">Enter Name</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name" name = "fullname">
+    </div>
+    <div class="custom-file" style="display: block; margin-bottom: 1em;">
+		<label class="custom-file-label" for="query_img">Upload Resume in pdf format</label>
+        <input type="file" accept="application/pdf" capture	class="custom-file-input" name="pdf" required/>
+
+          </div>
+          <center>
+          <button id="btn-submit" type="submit" class="btn btn-primary">
+            Upload
+          </button>
+      </center>
+        </form>
+        <div>
+            <a href={{ url_for('view_all') }}>
+              <button class="btn btn-success" style="margin-bottom: 10px; border-radius: 0;">View all Resume</button>
+            </a>
+        </div>
+        <div>
+            <a href={{ url_for('ranking') }}>
+              <button class="btn btn-success" style="margin-bottom: 10px; border-radius: 0;">Search Resume</button>
+            </a>
+        </div>
+    </div>
+    {% else %}
+    <div class="row">
+        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
+            <a href={{ url_for('home') }}>
+              <button class="btn btn-success" style="margin-bottom: 10px; border-radius: 0;">Upload More</button>
+            </a>
+        </div>
+        <div class="col-lg-1 col-md-4 col-sm-6 col-xs-6">
+            <a href={{ url_for('view_all') }}>
+              <button class="btn btn-success" style="margin-bottom: 10px; border-radius: 0;">View all Resume</button>
+            </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <table class="table table-bordered table-striped table-responsive">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Resume File</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile Number</th>
+                <!-- <th>Competencies</th>
+                <th>Measurable Results</th>
+                <th>Presentation</th> -->
+                <th>Education</th>
+                <th>Skills</th>
+                <!-- <th>Experience</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>1</th>
+                <th>{{resume_name}}</th>
+                <th>{{details['name']}}</th>
+                <th>{{details['email']}}</th>
+                <th>{{details['mobile']}}</th>
+                <!-- <th>Competencies</th>
+                <th>Measurable Results</th>
+                <th>Presentation</th> -->
+                <th>{{details['cgpa']}}</th>
+                <th>
+                  {% for i in details['skills'] %}
+                  {{i}},
+                  {% endfor %}
+                </th>
+                <!-- <th>Experience</th> -->
+              </tr>
+            </table>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+	<div class="jumbotron">
+<h1> Resume Parser</h1>
+</div>
+<div class="row">
+        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
+            <a href={{ url_for('home') }}>
+              <button class="btn btn-success" style="margin-bottom: 10px; border-radius: 0;">Upload More</button>
+            </a>
+        </div>
+    </div>
+    <form method="POST" style="margin-bottom: 2em;">
+    <div class = "row">
+    <div class="form-group col-lg-4">
+    <label for="exampleInputPassword1">Project Domain Search</label>
+    <input type="text" class="form-control" id="exampleInputPassword1" name="userquery" placeholder="Enter Query">
+  </div>
+  <div class="form-group col-lg-1">
+    <label for="exampleInputPassword1">Weight</label>
+    <input type="number" class="form-control" name="queryweight" max = 5 min = 1 value = 1>
+  </div>
+  </div>
+  <div class = "row">
+    <div class="form-group col-lg-4">
+    <label for="skills">Enter Skill</label>
+    <input type="text" class="form-control" id="skills" name="skillquery" placeholder="Enter Skill Required">
+  </div>
+  <div class="form-group col-lg-1">
+    <label for="exampleInputPassword1">Weight</label>
+    <input type="number" class="form-control" name="skillweight" max = 5 min = 1 value = 1>
+  </div>
+  </div>
+  <div class = "row">
+  <div class="form-group col-lg-4">
+    <label for="cgpa">CGPA Criteria</label>
+    <input type="text" class="form-control" id="cgpa" name="cgpaquery" placeholder="Enter min CGPA">
+  </div>
+  <div class="form-group col-lg-1">
+    <label for="exampleInputPassword1">Weight</label>
+    <input type="number" class="form-control" name="cgpaweight" max = 5 min = 1 value = 1>
+  </div>
+</div>
+          <center>
+          <button id="btn-submit" type="submit" class="btn btn-primary">
+            Search
+          </button>
+      </center>
+        </form>
+        {%if resume_list %}
+        <div class="row">
+        <div class="col-lg-11 col-md-12 col-sm-12 col-xs-12">
+          <table class="table table-bordered table-striped table-responsive">
+            <thead>
+              <tr>
+                <th> # </th>
+                <th> Resume Name </th>
+              </tr>
+            </thead>
+        {% for i in range(resume_list|length) %}
+        <tr>
+          <th>{{i}}</th>
+          <th>{{resume_list[i]}}</th>
+        </tr>
+        <!-- <h4>{{resume_list[i]}}</h4> -->
+        {% endfor %}
+        {% endif %}
+</div>
+</body>
+</html>
